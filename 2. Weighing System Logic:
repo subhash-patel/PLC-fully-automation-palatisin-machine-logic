@@ -1,0 +1,15 @@
+// ================================
+// Weighing Logic and Data Management (21 CFR Compliance)
+// ================================
+IF Weighing_Enabled THEN
+    ArticleWeight := Read_Analog(AIW2);  // Read weight from sensor
+    IF ArticleWeight > MaxWeight OR ArticleWeight < MinWeight THEN
+        AlarmActive := TRUE;
+        AlarmCode := 2;  // Weight discrepancy
+    ELSE
+        PalletData[ArticleCount].Weight := ArticleWeight;
+        PalletData[ArticleCount].Timestamp := GetTimestamp();
+        LogEvent('Article Weighed', GetTimestamp());
+        ArticleCount := ArticleCount + 1;
+    END_IF;
+END_IF;
