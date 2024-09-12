@@ -1,0 +1,18 @@
+// ================================
+// 21 CFR Data Management (Audit Trail, Electronic Signature)
+// ================================
+IF Weighing_Enabled THEN
+    AuditTrail[ArticleCount].Weight := ArticleWeight;
+    AuditTrail[ArticleCount].Timestamp := GetTimestamp();
+    AuditTrail[ArticleCount].OperatorID := GetOperatorID();
+    AuditTrail[ArticleCount].Signature := GetSignature();
+END_IF;
+
+IF User_Login THEN
+    IF AuthenticateUser(Username, Passcode) THEN
+        LogEvent('User Logged In', GetTimestamp());
+    ELSE
+        AlarmActive := TRUE;
+        AlarmCode := 4;  // Login Failed
+    END_IF;
+END_IF;
