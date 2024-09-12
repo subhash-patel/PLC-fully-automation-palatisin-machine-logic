@@ -1,0 +1,14 @@
+// ================================
+// Platform Control via VFD (Modbus Communication)
+// ================================
+IF Platform_Active THEN
+    Modbus_Write(VFD_Start_Address, StartCommand, VFD_Speed_Setpoint);  // Start VFD with Speed Setpoint
+ELSE
+    Modbus_Write(VFD_Stop_Address, StopCommand, 0);  // Stop VFD
+END_IF;
+
+// Handle Modbus Errors
+IF Modbus_Error THEN
+    AlarmActive := TRUE;
+    AlarmCode := 3;  // VFD Communication Error
+END_IF;
