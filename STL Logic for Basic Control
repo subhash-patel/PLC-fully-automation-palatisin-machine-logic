@@ -1,0 +1,40 @@
+//STL Logic for Basic Control
+stl
+
+// ================================
+// Basic Control Logic (Start, Stop, Emergency)
+// ================================
+A     I0.0       // Start Button
+AN    I0.2       // Emergency Button NOT pressed
+S     M0.0       // Machine Started Latch
+
+A     I0.1       // Stop Button
+R     M0.0       // Reset Machine Started Latch
+
+A     I0.2       // Emergency Stop Button
+S     M0.1       // Emergency Stop Latch
+R     M0.0       // Stop Machine on Emergency
+
+// ================================
+// VFD Platform Control via Modbus
+// ================================
+A     M0.0       // If Machine Started
+S     Q0.0       // Start VFD (Q0.0)
+L     AIW0       // Load Platform Speed from HMI
+T     AQW0       // Transfer to VFD Speed Command
+
+A     I0.1       // Stop Button
+R     Q0.0       // Stop VFD
+
+// ================================
+// Tower Lamp Logic (Red, Amber, Blue, Green)
+// ================================
+A     M0.0       // Machine Running
+S     Q0.2       // Green Light ON (Q0.2)
+
+A     M0.1       // Alarm Active
+S     Q0.5       // Red Light ON (Q0.5)
+R     Q0.2       // Green Light OFF
+
+A     M1.0       // Weighing Complete
+S     Q0.4       // Blue Light ON (Q0.4)
