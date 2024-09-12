@@ -1,0 +1,26 @@
+// ================================
+// Event Logging (HMI, Alarms, Recipes)
+// ================================
+IF Start_Button THEN
+    LogEvent('Machine Started', GetTimestamp());
+END_IF;
+
+IF Stop_Button THEN
+    LogEvent('Machine Stopped', GetTimestamp());
+END_IF;
+
+IF Emergency_Button THEN
+    LogEvent('Emergency Stop Triggered', GetTimestamp());
+END_IF;
+
+IF Weighing_Complete THEN
+    LogEvent('Weighing Completed', GetTimestamp());
+END_IF;
+
+IF AlarmActive THEN
+    CASE AlarmCode OF
+        1: LogAlarm('Servo Axis 1 Fault', GetTimestamp());
+        2: LogAlarm('Weight Sensor Failure', GetTimestamp());
+        // Add more alarms as necessary
+    END_CASE;
+END_IF;
