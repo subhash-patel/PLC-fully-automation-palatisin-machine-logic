@@ -1,0 +1,34 @@
+To combine all the components of the PLC code for your maritime machine, I'll use both STL and SCL, incorporating the previous logic for platform control, servo axes, weighing, event and alarm lists, HMI integration, Modbus communication for VFD, tower lamps, and the required 21 CFR compliance.
+
+Inputs and Outputs Mapping:
+Digital Inputs:
+Address	Signal Description
+I0.0	Start Button
+I0.1	Stop/Reset Button
+I0.2	Emergency Stop Button
+I0.3	Min Limit Switch (Platform)
+I0.4	Max Limit Switch (Platform)
+I0.5	Weight Sensor Input
+I0.6	Servo Axis 1 Limit Switch (Min)
+I0.7	Servo Axis 1 Limit Switch (Max)
+Digital Outputs:
+Address	Signal Description
+Q0.0	VFD Start
+Q0.1	VFD Stop
+Q0.2	Green Tower Lamp (Machine Running)
+Q0.3	Amber Tower Lamp (Standby)
+Q0.4	Blue Tower Lamp (Weighing Complete)
+Q0.5	Red Tower Lamp (Alarm Active)
+Q0.6	Servo Axis 1 Motor Start
+Q0.7	Servo Axis 2 Motor Start
+Analog Inputs:
+Address	Signal Description
+AIW0	Platform Speed Setpoint (HMI)
+AIW2	Weighing Sensor (Analog Value)
+Analog Outputs:
+Address	Signal Description
+AQW0	VFD Speed (Platform Speed Control)
+Modbus Communication:
+Address	Signal Description
+MW100	Modbus Write to VFD (Start/Stop and Speed)
+MW102	Modbus Read (Status Feedback)
