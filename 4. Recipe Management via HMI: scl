@@ -1,0 +1,15 @@
+// ================================
+// Recipe Feature for Different Palletizing Configurations
+// ================================
+IF LoadRecipe THEN
+    Recipe := SelectedRecipe;
+    PalletizingSpeed := RecipeData[Recipe].Speed;
+    Servo_Positions := RecipeData[Recipe].ServoPositions;
+    BurnReduction := RecipeData[Recipe].BurnReductionSetting;
+END_IF;
+
+IF SaveRecipe THEN
+    RecipeData[RecipeNumber].Speed := PalletizingSpeed;
+    RecipeData[RecipeNumber].ServoPositions := Servo_Positions;
+    RecipeData[RecipeNumber].BurnReductionSetting := BurnReduction;
+END_IF;
